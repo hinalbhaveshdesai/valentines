@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Valentine’s</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      margin-top: 150px;
+    }
+
+    h1 {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 22px;
+      margin-top: 20px;
+    }
+
+    .signature {
+      margin-top: 60px;
+      text-align: right;
+      padding-right: 60px;
+      font-size: 20px;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="content">
+  <h1>Happy Valentine’s Baby ❤️</h1>
+  <p>Looking forward to spending this one together.</p>
+
+  <div class="signature">
+    <div>Your Beloved Wife,</div>
+    <div><strong>Mrs. Hinal Sheth</strong></div>
+  </div>
+</div>
+
+<script>
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 7000);
+  }
+
+  setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

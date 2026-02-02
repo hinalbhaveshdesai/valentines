@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Valentine’s</title>
+
   <style>
     body {
       margin: 0;
@@ -12,36 +14,67 @@
       font-family: Arial, sans-serif;
       color: white;
       text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .content {
       position: relative;
       z-index: 2;
-      margin-top: 150px;
+      margin-top: 12vh;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .center-message {
+      font-size: clamp(22px, 6vw, 30px);
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .main-message {
+      opacity: 0;
+      transition: opacity 2s ease;
     }
 
     h1 {
-      font-size: 48px;
+      font-size: clamp(30px, 6vw, 48px);
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 22px;
-      margin-top: 20px;
+      font-size: clamp(18px, 4.5vw, 22px);
+      margin-top: 10px;
+    }
+
+    .photo {
+      margin-top: 30px;
+      opacity: 0;
+      transition: opacity 2.5s ease;
+    }
+
+    .photo img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
     .signature {
-      margin-top: 60px;
+      margin-top: 40px;
       text-align: right;
-      padding-right: 60px;
-      font-size: 20px;
+      font-size: clamp(16px, 4vw, 20px);
+      padding-right: 10px;
     }
 
     .heart {
       position: absolute;
-      bottom: -20px;
-      font-size: 24px;
+      bottom: -30px;
       animation: floatUp linear infinite;
-      opacity: 0.8;
+      opacity: 0.9;
+      user-select: none;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
@@ -50,7 +83,7 @@
         opacity: 1;
       }
       100% {
-        transform: translateY(-110vh) scale(1.5);
+        transform: translateY(-120vh) scale(1.6);
         opacity: 0;
       }
     }
@@ -59,32 +92,75 @@
 <body>
 
 <div class="content">
-  <h1>Happy Valentine’s Baby ❤️</h1>
-  <p>Looking forward to spending this one together.</p>
 
-  <div class="signature">
-    <div>Your Beloved Wife,</div>
-    <div><strong>Mrs. Hinal Sheth</strong></div>
+  <!-- First Message -->
+  <div id="yesMessage" class="center-message">
+    ✨ I knew you’d say yes ✨
   </div>
+
+  <!-- Main Valentine Content -->
+  <div id="mainMessage" class="main-message">
+    <h1>Happy Valentine’s Baby ❤️</h1>
+    <p>Looking forward to spending this one together.</p>
+
+    <!-- Image -->
+    <div id="photo" class="photo">
+      <img src="us.jpg" alt="Us Together">
+    </div>
+
+    <div class="signature">
+      <div>Your Beloved Wife,</div>
+      <div><strong>Mrs. Hinal Sheth</strong></div>
+    </div>
+  </div>
+
 </div>
 
+<!-- Background Music -->
+<audio id="bgMusic" src="song.mp3"></audio>
+
 <script>
+  const yesMessage = document.getElementById("yesMessage");
+  const mainMessage = document.getElementById("mainMessage");
+  const photo = document.getElementById("photo");
+  const music = document.getElementById("bgMusic");
+
+  // Show first message
+  setTimeout(() => {
+    yesMessage.style.opacity = "1";
+  }, 500);
+
+  // Fade out after 4 seconds
+  setTimeout(() => {
+    yesMessage.style.opacity = "0";
+  }, 2500);
+
+  // Show main message + image + start music
+  setTimeout(() => {
+    mainMessage.style.opacity = "1";
+    photo.style.opacity = "1";
+    music.volume = 0.6;
+    music.play();
+  }, 4000);
+
+  // Floating hearts
+  const hearts = ["❤️", "💖", "💘", "💝", "💕", "💗"];
+  const colors = ["#ff4d6d", "#ffb3c6", "#ffd1dc", "#ff85a1"];
+
   function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "❤️";
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
     heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 18 + 20 + "px";
     heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
 
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 7000);
+    setTimeout(() => heart.remove(), 8000);
   }
 
-  setInterval(createHeart, 300);
+  setInterval(createHeart, 250);
 </script>
 
 </body>
